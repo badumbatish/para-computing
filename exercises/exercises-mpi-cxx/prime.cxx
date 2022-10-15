@@ -14,6 +14,7 @@
 #include <sstream>
 using namespace std;
 #include <mpi.h>
+#include <mpl/mpl.hpp>
 
 int main() {
   MPI_Comm comm = MPI_COMM_WORLD;
@@ -30,12 +31,23 @@ int main() {
 
   // 1. Set loop bounds
 /**** your code here ****/
+MPI_Comm_rank(comm, &procno);
+MPI_Comm_size(comm, &nprocs);
+/* Divide the work by number of workers
+gap = max_factor / nprocs;
+start_gap = max_factor(procno-1/nprocs)
+*/
+int gap = maxfactor / nprocs;
+int myfactor = (maxfactor/nprocs)*(procno);
+
+if(myfactor == 0) myfactor = 2;
+std::cout << "Process ID: " << procno << std::endl;
   // 2. Fill in loop header
-  for ( int myfactor=
+  for (int i= myfactor; i <= myfactor+gap;i++
 /**** your code here ****/
        ) {
-    if (bignum%myfactor==0) {
-      proctext << "Processor " << procno << " found factor " << myfactor << endl;
+    if (bignum%i==0) { 
+      proctext << "Processor " << procno << " found factor " << i << endl;
       cerr << proctext.str(); proctext.clear();
     }
   }
