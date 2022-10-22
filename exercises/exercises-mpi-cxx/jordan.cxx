@@ -89,13 +89,14 @@ int main(int argc,char **argv) {
       double pivot = matrix[pivot_column];
       // scaling factors per row
       for (int row=0; row<N; row++)
-	scalings[row] = matrix[row]/pivot;
+	      scalings[row] = matrix[row]/pivot;
     }
     /*
      * Exercise:
      * make sure that everyone knows the scaling factors
      */
 /**** your code here ****/
+    MPI_Bcast(scalings,N,MPI_DOUBLE,procno,comm);
     /*
      * Now update the matrix.
      * Answer for yourself: why is there no loop over the columns?

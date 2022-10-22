@@ -44,11 +44,11 @@ int main() {
    * -- check that the sum of scales values is 1
    */
   float sumrandom, scaled_random, sum_scaled_random;
-  MPI_Allreduce(
+  MPI_Allreduce(&myrandom, &sumrandom, 1,MPI_FLOAT, MPI_SUM,comm
 /**** your code here ****/
 		);
   scaled_random = myrandom / sumrandom;
-  MPI_Allreduce(
+ MPI_Allreduce(&scaled_random, &sum_scaled_random, 1, MPI_FLOAT, MPI_SUM, comm
 /**** your code here ****/
 		);
   /*

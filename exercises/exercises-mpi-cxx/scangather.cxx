@@ -48,7 +48,7 @@ int main(int argc,char **argv) {
    *   Which routine do you use here?
    */
 /**** your code here ****/
-    (&my_number_of_elements,&my_first_index,
+    MPI_Scan(&my_number_of_elements,&my_first_index,
      1,MPI_INT,MPI_SUM,comm);
   printf("Proc %3d has %3d elements, range [%4d,%4d)\n",
          procno,my_number_of_elements,my_first_index,my_first_index+my_number_of_elements);
@@ -76,7 +76,7 @@ int main(int argc,char **argv) {
   if (procno==0)
     size_buffer = vector<int>( nprocs );
   MPI_Gather
-    (
+    (my_elements,my_number_of_elements, 
 /**** your code here ****/
      );
   // where are they going to go in the big buffer?
